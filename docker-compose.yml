@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  app:
+    container_name: laravel-inertia-element-plus-app
+    build:
+      context: ./docker/php
+    restart: unless-stopped
+    tty: true
+    volumes:
+        - ./:/var/www/app
+    networks:
+      - laravel-inertia-element-plus-network
+    depends_on:
+        - postgres
+
+  nginx:
+    image: nginx:alpine
+    container_name: laravel-inertia-element-plus-nginx
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./:/var/www/app
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - laravel-inertia-element-plus-network
+
+  postgres:
+    image: postgres
+    container_name: laravel-inertia-element-plus-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - laravel-inertia-element-plus-data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - laravel-inertia-element-plus-network
+
+networks:
+  laravel-inertia-element-plus-network:
+    driver: bridge
+
+volumes:
+  laravel-inertia-element-plus-data:
