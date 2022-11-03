@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+      "target": "es5",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "baseUrl": "./",
+      "strict": true,
+      "skipLibCheck": true,
+      "paths": {
+        "@/*": ["resources/js/*"]
+      },
+      "types": ["element-plus/global"]
+  },
+  "include": ["resources/js/**/*"],
+  "exclude": ["node_modules", "public"],
+  "types": [
+    "@types/ziggy-js"
+  ]
+}
