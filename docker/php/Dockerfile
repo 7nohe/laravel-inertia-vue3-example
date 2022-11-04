@@ -20,8 +20,8 @@ RUN apt update \
             pdo_mysql
 
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash \
-        && apt-get update -y \
-        && apt-get install -y \
+        && apt update -y \
+        && apt install -y \
         nodejs
 
  WORKDIR /var/www/app
